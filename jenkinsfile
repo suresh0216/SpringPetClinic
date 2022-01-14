@@ -1,0 +1,34 @@
+pipeline{
+    agent{label 'master' }
+    tools{maven'M3 }
+    stages{
+        stage('checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/suresh0216/SpringPetClinic.git'
+            }
+        
+            
+        }
+        stage('Build'){
+            steps{
+                sh 'mvn compile'
+            }
+        }
+        syage('Test'){
+            steps{
+                sh'mvn Test'
+            }
+        stage('package'){
+            steps{
+                sh'mvn package'
+            }
+        }    
+        stage('Deploy'){
+            steps{
+                sh'java-jar/var/lib/jenkins/workspace/declarativepipeline/target'
+            }
+        }
+        
+        
+    }
+}
